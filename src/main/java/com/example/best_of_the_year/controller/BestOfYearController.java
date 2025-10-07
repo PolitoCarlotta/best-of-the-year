@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -65,4 +66,42 @@ public class BestOfYearController {
             return "songs";
          }
 
+         @GetMapping("/movies/{id}")
+         public String moviesById (@PathVariable(name="id", required=false) String param, Model model){
+            List <Movie> movies = getBestMovie();
+               Movie movieFiltrato = null;
+               for(Movie m : movies) {
+                  if(m.getId().equals(param)){
+                     movieFiltrato = m;
+                     break;
+                  }
+               }
+                  if(movieFiltrato != null){
+                     System.out.println(movieFiltrato);
+                     model.addAttribute("movie", movieFiltrato);
+                    
+                  }
+
+             return "detailMovie";
+         }
+
+
+         @GetMapping("/songs/{id}")
+                  public String songsById (@PathVariable(name="id", required=false) String param, Model model){
+            List <Song> songs = getBestSong();
+               Song songFiltrata = null;
+               for(Song s : songs) {
+                  if(s.getId().equals(param)){
+                     songFiltrata = s;
+                     break;
+                  }
+               }
+                  if(songFiltrata != null){
+                     System.out.println(songFiltrata);
+                     model.addAttribute("song", songFiltrata);
+                    
+                  }
+
+             return "detailSong";
+         }
 }
