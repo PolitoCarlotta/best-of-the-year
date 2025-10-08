@@ -18,7 +18,7 @@ import com.example.best_of_the_year.model.Song;
 
 public class BestOfYearController {
 
-        @GetMapping("/best")
+        @GetMapping("/index/")
         public String saluta (@RequestParam(required=false) String nome, Model model){
             model.addAttribute("nome" , nome);
             return "index";
@@ -53,16 +53,14 @@ public class BestOfYearController {
          @GetMapping("/movies")
 
          public String bestMovies (Model model) {
-            List <Movie> movies = getBestMovie();
-            model.addAttribute("movies", movies);
+            model.addAttribute("movies", getBestMovie());
             return "movies";
          }
 
 
          @GetMapping("/songs")
          public String bestSongs (Model model) {
-            List <Song> songs = getBestSong();
-            model.addAttribute("songs", songs);
+            model.addAttribute("songs", getBestSong());
             return "songs";
          }
 
@@ -84,7 +82,6 @@ public class BestOfYearController {
 
              return "detailMovie";
          }
-
 
          @GetMapping("/songs/{id}")
                   public String songsById (@PathVariable(name="id", required=false) String param, Model model){
