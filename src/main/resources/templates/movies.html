@@ -10,24 +10,32 @@
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}"/>
     
   <link rel="stylesheet" th:href="@{/css/application.css}">
-  <title th:text="${titolo}"></title>
+  <title th:text="Best"></title>
 </head>
 
 
+
 <body>
-  <div class="container">
-    <h1>I film migliori</h1>
+  <nav th:replace="~{navbar :: navbar('Movie')}"></nav>
 
-    <div th:if = "${movies.size() == 0}">The list is empty</div>
-    <div th:if = "${movies.size() != 0}">
-      <p>
-         <span th:each="movie, iterStat : ${movies}">
-         <span th:text="${movie.titolo}"></span><span th:if="${!iterStat.last}">, </span>
-         </span>
-      </p>
+ <div class="container">
+        <h1 class="text-center py-3">Movie</h1>
+        <div class="row justify-content-center">
+            <div class="col-3">
+                <ul class="list-group" th:if="${movies.size() > 0}">
+                    <li class="list-group-item" th:each="item : ${movies}">
+                        
+                        <a class="nav-link" th:href="@{/index/movies/{id}(id=${item.id})}">
+
+                            <span th:text="${item.titolo}"></span>
+                        </a>
+                    </li>
+                </ul>
+
+                <p th:unless="${movies.size() > 0}"> Non ci sono film nella lista </p>
+            </div>
+        </div>
     </div>
-
-  </div>
       <!-- Bootstrap Bundle with Popper -->
    	<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
 </body>

@@ -50,7 +50,7 @@ public class BestOfYearController {
             return songs;
          }
 
-         @GetMapping("/movies")
+         @GetMapping("/index/movies/")
 
          public String bestMovies (Model model) {
             model.addAttribute("movies", getBestMovie());
@@ -58,13 +58,13 @@ public class BestOfYearController {
          }
 
 
-         @GetMapping("/songs")
+         @GetMapping("/index/songs/")
          public String bestSongs (Model model) {
             model.addAttribute("songs", getBestSong());
             return "songs";
          }
 
-         @GetMapping("/movies/{id}")
+         @GetMapping("/index/movies/{id}")
          public String moviesById (@PathVariable(name="id", required=false) String param, Model model){
             List <Movie> movies = getBestMovie();
                Movie movieFiltrato = null;
@@ -83,7 +83,7 @@ public class BestOfYearController {
              return "detailMovie";
          }
 
-         @GetMapping("/songs/{id}")
+         @GetMapping("/index/songs/{id}")
                   public String songsById (@PathVariable(name="id", required=false) String param, Model model){
             List <Song> songs = getBestSong();
                Song songFiltrata = null;
